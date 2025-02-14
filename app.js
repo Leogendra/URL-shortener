@@ -53,8 +53,8 @@ app.post('/shorten', async (req, res) => {
     }
     const codeValidity = await isCodeValid(shortUrl);
     if (!codeValidity) {
-        console.log('Code already in use or invalid');
-        return res.status(400).send('Code already in use or invalid');
+        console.log('Invalid or already used code');
+        return res.status(400).json({ error: 'Invalid or already used code.' });
     }
     console.log("URL to shorten :", longUrl);
     console.log("Hash of the URL :", shortUrl);
@@ -128,7 +128,7 @@ app.post('/delete/:shortUrl', async (req, res) => {
     try {
         const urlDoc = await encodedUrl.findOne({ shortUrl: shortUrl });
         if (!urlDoc) {
-            return res.status(404).send('URL not found.');
+            return res.status(404).json({ error: 'URL not found.' });
         }
         await encodedUrl.deleteOne({ shortUrl: shortUrl });
         console.log(`URL deleted: ${shortUrl}`);
@@ -136,7 +136,7 @@ app.post('/delete/:shortUrl', async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(500).send('Error while deleting URL.');
+        res.status(500).json({ error: 'Unknown error while deleting URL.' });
     }
 });
 

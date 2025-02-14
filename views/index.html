@@ -16,7 +16,7 @@
         <form id="urlForm" method="POST" action="/shorten">
             <label for="urlInput" class="error error-url">Invalid URL</label>
             <input type="text" id="urlInput" name="urlInput" placeholder="URL to shorten" required>
-            <label for="codeInput" class="error error-code">Code already used</label>
+            <label for="codeInput" class="error error-code">Invalid or already used code</label>
             <input type="text" id="codeInput" name="codeInput" placeholder="code (optional)">
             <div id="loading" class="loading-spinner"></div>
             <button type="submit" class="submit-button">Shorten</button>
