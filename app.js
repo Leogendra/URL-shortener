@@ -28,12 +28,11 @@ app.get('/', async (req, res) => {
 });
 
 
-async function checkIfCodeValid(code) {
+async function isCodeValid(code) {
     const forbidden_codes = ["console", "shorten", "checkCode", "delete", "update"];
     if (forbidden_codes.includes(code)) {
         return false;
     }
-    // Check if core are only composed of letters and numbers
     if (!/^[a-zA-Z0-9]+$/.test(code)) {
         return false;
     }
@@ -41,7 +40,6 @@ async function checkIfCodeValid(code) {
     if (urlDoc != null) {
         return false;
     }
-
     return true;
 }
 
@@ -53,18 +51,20 @@ app.post('/shorten', async (req, res) => {
     if (code != "") {
         shortUrl = code;
     }
-    if (!checkIfCodeValid(shortUrl)) {
-        return res.status(400).send('Invalid code');
+    const codeValidity = await isCodeValid(shortUrl);
+    if (!codeValidity) {
+        console.log('Code already in use or invalid');
+        return res.status(400).send('Code already in use or invalid');
     }
     console.log("URL to shorten :", longUrl);
     console.log("Hash of the URL :", shortUrl);
 
     try {
-        // Check if URL already exists
         let urlDoc = await encodedUrl.findOne({ longUrl: longUrl });
-        if (urlDoc != null) {
-            console.log('URL déjà raccourcie');
-            return res.json({ shortUrl: shortUrl });
+        // Check if the exact URL/code already exists in the database
+        if ((urlDoc != null) && (urlDoc.shortUrl == shortUrl)) { 
+            console.log('URL already exists in the database');
+            return res.json({ shortUrl: urlDoc.shortUrl });
         }
         await encodedUrl.create({
             longUrl: longUrl,
@@ -85,10 +85,10 @@ app.post('/shorten', async (req, res) => {
 
 app.post('/checkCode', async (req, res) => {
     const code = req.body.code;
-
     try {
         // Check if code already exists
-        if (!checkIfCodeValid(code)) {
+        const codeValidity = await isCodeValid(code);
+        if (!codeValidity) {
             return res.json({ codeExists: true });
         }
         console.log('Code available');
@@ -102,9 +102,10 @@ app.post('/checkCode', async (req, res) => {
 
 const authMiddleware = (req, res, next) => {
     const credentials = auth(req);
-    if (credentials && credentials.name === CREDENTIAL_NAME && credentials.pass === CREDENTIAL_PASS) {
+    if (credentials && (credentials.name === CREDENTIAL_NAME) && (credentials.pass === CREDENTIAL_PASS)) {
         next();
-    } else {
+    } 
+    else {
         res.status(401);
         res.setHeader('WWW-Authenticate', 'Basic realm="Console"');
         res.end('Acces denied');
@@ -145,17 +146,19 @@ app.post('/update', async (req, res) => {
     try {
         const urlDoc = await encodedUrl.findOne({ shortUrl: oldShortUrl });
         if (!urlDoc) {
-            return res.status(404).send('Original URL not found.');
+            return res.status(404).json({ error: 'Original URL not found.' });
         }
         // Check if code is already in use
-        if (!checkIfCodeValid(newShortUrl)) {
-            return res.status(400).send('Invalid code');
+        const codeValidity = await isCodeValid(newShortUrl);
+        if (!codeValidity) {
+            return res.status(400).json({ error: 'Invalid or already used code.' });
         }
         await encodedUrl.updateOne({ shortUrl: oldShortUrl }, { $set: { shortUrl: newShortUrl } });
         res.json({ message: 'URL successfully updated.' });
-    } catch (err) {
+    } 
+    catch (err) {
         console.log(err);
-        res.status(500).send('Error while updating URL.');
+        res.status(500).json({ error: 'Unknown error while updating URL.' });
     }
 });
 
