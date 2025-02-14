@@ -36,8 +36,13 @@ A minimalist URL shortener based on **Node.js** and **MongoDB**.
    The server now runs on `http://localhost:3000`
 
 ## Usage
-- Enter the URL you want to shorten in the input field and click on the `Shorten` button. You can customize the shortened code by entering it in the `Custom Code` field.
-- To accès the **Admin panel**, click the "URL"
+- Enter the URL you want to shorten in the input field and click on the `Shorten` button. 
+  - You can customize the shortened code by entering it in the `Custom Code` field.  
+  - The shortened URL will be displayed below, you can copy it by clicking on the `Copy` button.  
+  - The URL will be in the format `http://localhost:3000/<shortened_code>`
+- To acces the **Admin panel**, click the "URL" title.  
+  - Enter the credentials specified in the `.env` file to access the admin panel.
+  - You can delete and update shortened URLs, as well as view visit statistics.
 
 ![Homepage](public/img/homepage.png)
 ![Admin panel](public/img/admin.png)
