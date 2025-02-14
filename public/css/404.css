@@ -1,0 +1,57 @@
+/* variables */
+:root {
+    --primary-color: #008B62;
+    --secondary-color: #222;
+    --background-color: #e7f9ff;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: sans-serif;
+    background-color: var(--background-color);
+}
+
+h1,
+a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.section {
+    padding: 4rem 2rem;
+}
+
+.section .error {
+    font-size: 150px;
+    color: var(--primary-color);
+    text-shadow:
+        5px 5px 1px var(--secondary-color),
+        15px 15px 8px rgba(0, 0, 0, 0.2);
+}
+
+.page {
+    margin: 2rem 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #444;
+}
+
+.back {
+    display: inline-block;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.75rem 1rem 0.6rem;
+    transition: all 0.2s linear;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.back:hover {
+    background: var(--secondary-color);
+    color: #ddd;
+}

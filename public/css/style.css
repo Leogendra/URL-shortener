@@ -1,0 +1,218 @@
+/* variables */
+:root {
+    --primary-color: #008B62;
+    --secondary-color: #222;
+    --background-color: #e7f9ff;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: sans-serif;
+    background-color: var(--background-color);
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    letter-spacing: 3px
+}
+
+.secret-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: auto;
+}
+
+.shorten {
+    letter-spacing: -4px
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5% auto 0;
+}
+
+#urlForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 2rem 0;
+}
+
+.error {
+    margin: 15px 0 5px;
+    visibility: hidden;
+    color: red;
+    font-weight: 700;
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+label {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+#urlInput, #codeInput {
+    font-weight: 600;
+    color: #444;
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+    padding: 0.3rem;
+}
+
+#urlInput {
+    font-size: 20px;
+}
+
+#codeInput {
+    font-size: 15px;
+    width: 120px;
+}
+
+#urlInput::placeholder, #codeInput::placeholder {
+    font-size: 16px;
+    color: #66666650;
+}
+
+button {
+    display: inline-block;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.75rem 1rem 0.6rem;
+    transition: all 0.2s linear;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    color: #ddd;
+    background: var(--secondary-color);
+}
+
+.submit-button {
+    margin-top: 40px;
+}
+
+.resultDiv {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 50%;
+    color: #444;
+    background-color: #FFFFFF;
+    margin: 1.5rem 0;
+    padding: 0.5rem 0.7rem;
+    border-radius: 10px;
+    border: 2px solid var(--secondary-color);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.resultUrl {
+    min-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(5px); }
+}
+
+
+/* media query */
+@media screen and (max-width: 800px) {
+    .resultDiv {
+        font-size: 16px;
+        max-width: 90%;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+
+/* TOOLTIP */
+.copy-button {
+    display: block;
+    position: relative;
+    background-color: var(--primary-color);
+    color: #FFF;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.icon-copy {
+    font-size: 1.2rem !important;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    width: 80px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    z-index: 1;
+    bottom: 150%;
+    margin-left: -40px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.copy-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* Loading button */
+.loading-spinner {
+    display: none;
+    margin-top: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #000;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
