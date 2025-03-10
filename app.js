@@ -33,7 +33,7 @@ async function isCodeValid(code) {
     if (forbidden_codes.includes(code)) {
         return false;
     }
-    if (!/^[a-zA-Z0-9]+$/.test(code)) {
+    if (!/^[a-zA-ZÀ-ù0-9_-]+$/.test(code)) {
         return false;
     }
     const urlDoc = await encodedUrl.findOne({ shortUrl: code });
