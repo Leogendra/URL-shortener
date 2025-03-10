@@ -44,5 +44,8 @@ A minimalist URL shortener based on **Node.js** and **MongoDB**.
   - Enter the credentials specified in the `.env` file to access the admin panel.
   - You can delete and update shortened URLs, as well as view visit statistics.
 
-![Homepage](public/img/homepage.png)
-![Admin panel](public/img/admin.png)
+<p align="center">
+  <img src="public/img/homepage.png" alt="Homepage" >
+  </br>
+  <img src="public/img/admin.png" alt="Admin console" >
+</p>
