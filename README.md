@@ -12,6 +12,7 @@ A minimalist URL shortener based on **Node.js** and **MongoDB**.
 
 ## Prerequisites
 - **Node.js** (recommended version: 14+)
+- **pnpm** (package manager)
 - **MongoDB** (database for storing URLs) : Create a database and get the connection URI
 - A `.env` file containing environment variables:
   ```env
@@ -26,12 +27,12 @@ A minimalist URL shortener based on **Node.js** and **MongoDB**.
 
 2. **Install dependencies**:
    ```sh
-   npm i
+   pnpm install
    ```
 
 3. **Start the application**:
    ```sh
-   npm run dev
+   pnpm dev
    ```
    The server now runs on `http://localhost:3000`
 
@@ -45,7 +46,7 @@ A minimalist URL shortener based on **Node.js** and **MongoDB**.
   - You can delete and update shortened URLs, as well as view visit statistics.
 
 <p align="center">
-  <img src="public/img/homepage.png" alt="Homepage" >
-  </br>
-  <img src="public/img/admin.png" alt="Admin console" >
+    <img src="public/img/homepage.png" alt="Homepage" >
+    </br>
+    <img src="public/img/admin.png" alt="Admin console" >
 </p>
