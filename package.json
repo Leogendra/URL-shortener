@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Leogendra/URL-shortener#readme",
   "keywords": [],
+  "packageManager": "pnpm@10.20.0",
   "dependencies": {
     "basic-auth": "^2.0.1",
     "cors": "^2.8.5",
